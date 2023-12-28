@@ -3,6 +3,13 @@
     "description": "Create boilerplate code for laravel resources.",
     "type": "library",
     "license": "MIT",
+    "require": {
+
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.18",
+        "pestphp/pest": "^2.30"
+    },
     "autoload": {
         "psr-4": {
             "Nonetallt\\LaravelResourceBoiler\\": "src/"
@@ -13,10 +20,8 @@
             "Test\\": "test/"
         }
     },
+    "prefer-stable": true,
     "minimum-stability": "dev",
-    "require-dev": {
-        "pestphp/pest": "3.x-dev"
-    },
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
