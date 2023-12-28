@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Nonetallt\LaravelResourceBoiler\Console\Command;
 
-use App\Domain\Vendor\ResourceGenerator\ResourceControllerAction;
+use Nonetallt\LaravelResourceBoiler\ResourceControllerAction;
 use Illuminate\Console\Command;
-use PainlessPHP\String\Str;
+use Illuminate\Support\Str;
 
 class GenerateResourceCommand extends Command
 {
@@ -48,7 +48,7 @@ class GenerateResourceCommand extends Command
             $this->call('make:controller', [$controller, '--resource']);
         }
 
-        $resourceSnakeCase = Str::toSnakeCase($resource);
+        $resourceSnakeCase = Str::snake($resource);
         $actions = implode(',', array_map(fn($action) => "'$action'", array_keys($requests)));
         $controllerClass = "App\\Http\\Controllers\\$controller";
 
