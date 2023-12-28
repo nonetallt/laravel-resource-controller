@@ -6,7 +6,8 @@
     "require-dev": {
         "orchestra/testbench": "^8.18",
         "pestphp/pest": "^2.30",
-        "pestphp/pest-plugin-laravel": "^2.2"
+        "pestphp/pest-plugin-laravel": "^2.2",
+        "painless-php/filesystem": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -40,14 +41,6 @@
         "post-autoload-dump": [
             "@clear",
             "@prepare"
-        ],
-        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
-        "prepare": "@php vendor/bin/testbench package:discover --ansi",
-        "build": "@php vendor/bin/testbench workbench:build --ansi",
-        "serve": [
-            "Composer\\Config::disableProcessTimeout",
-            "@build",
-            "@php vendor/bin/testbench serve"
         ],
         "test": [
             "@php vendor/bin/pest --test-directory=test"

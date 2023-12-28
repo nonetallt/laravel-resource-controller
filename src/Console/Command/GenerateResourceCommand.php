@@ -27,7 +27,7 @@ class GenerateResourceCommand extends Command
      */
     public function handle()
     {
-        dd('foo');
+
         $resource = $this->argument('resource');
         $resource = lcfirst($resource);
         $migration = "create_{$resource}s_table";
@@ -57,6 +57,7 @@ class GenerateResourceCommand extends Command
         $routeFile = $this->option('route-file');
         $routeFilePath = app_path("routes/$routeFile");
 
+        dd($routeFilePath);
         file_put_contents($routeFilePath, file_get_contents($routeFilePath) . PHP_EOL . $routes);
     }
 

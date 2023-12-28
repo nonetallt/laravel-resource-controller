@@ -1,11 +1,22 @@
 <?php
 
+use Nonetallt\LaravelResourceBoiler\Console\Command\GenerateResourceCommand;
+use Nonetallt\LaravelResourceBoiler\ResourceControllerAction;
+use Test\TestCase;
 
 test('example', function () {
+    /** @var TestCase $this */
 
-    expect(config('app.env'))->toBe('testing');
-    // var_dump($this instanceof \Test\TestCase);
-    // $this->artisan('inspire')->assertExitCode(0);
+    $artisan = $this->artisan(GenerateResourceCommand::class, ['resource' => 'Foo'])
+    ->expectsConfirmation("Create migration 'create_foos_table'?")
+    ->expectsConfirmation("Create model 'Foo'?");
 
-    // expect(true)->toBeTrue();
+    foreach(ResourceControllerAction::cases() as $case) {
+        $action = ucfirst($case->value);
+        $artisan = $artisan->expectsConfirmation("Create request 'Foo/{$action}FooRequest'?");
+    }
+
+    $artisan->expectsConfirmation("Create controller 'FooController'?");
+
+    // var_dump('foo');
 });
