@@ -1,0 +1,12 @@
+type Props = {
+{{page_prop_types}}
+}
+
+export default function InertiaReactPage({{{page_prop_names}}} : Props) {
+
+  return (
+    <>
+      {{page_name}}
+    </>
+  )
+}
