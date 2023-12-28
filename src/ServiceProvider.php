@@ -9,7 +9,7 @@ class ServiceProvider extends SupportServiceProvider
 {
     public function register() : void
     {
-        $this->mergeConfigFrom(dirname(__DIR__) . PATH_SEPARATOR . 'resource-boiler.php', 'resource-boiler');
+        $this->mergeConfigFrom(dirname(__DIR__) . '/config/resource-boiler.php', 'resource-boiler');
     }
 
     public function boot() : void

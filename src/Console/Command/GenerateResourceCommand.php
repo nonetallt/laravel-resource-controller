@@ -27,6 +27,7 @@ class GenerateResourceCommand extends Command
      */
     public function handle()
     {
+        dd('foo');
         $resource = $this->argument('resource');
         $resource = lcfirst($resource);
         $migration = "create_{$resource}s_table";
