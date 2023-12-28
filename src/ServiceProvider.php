@@ -3,6 +3,7 @@
 namespace Nonetallt\LaravelResourceBoiler;
 
 use Illuminate\Support\ServiceProvider as SupportServiceProvider;
+use Nonetallt\LaravelResourceBoiler\Console\Command\GenerateResourceCommand;
 
 class ServiceProvider extends SupportServiceProvider
 {
@@ -13,6 +14,10 @@ class ServiceProvider extends SupportServiceProvider
 
     public function boot() : void
     {
-
+        if($this->app->runningInConsole()) {
+            $this->commands([
+                GenerateResourceCommand::class
+            ]);
+        }
     }
 }
