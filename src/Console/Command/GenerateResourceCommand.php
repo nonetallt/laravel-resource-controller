@@ -13,7 +13,7 @@ class GenerateResourceCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:generate-resource {resource} {--route-file=web}';
+    protected $signature = 'make:resource-boiler {resource} {--route-file=web}';
 
     /**
      * The console command description.
