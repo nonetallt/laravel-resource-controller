@@ -3,7 +3,9 @@
 namespace Test\Trait;
 
 use PainlessPHP\Filesystem\Directory;
+use PainlessPHP\Filesystem\DirectoryIteratorConfig;
 use PainlessPHP\Filesystem\Filesystem;
+use PainlessPHP\Filesystem\FilesystemObject;
 
 trait UsesLaravelFiles
 {
@@ -35,7 +37,11 @@ trait UsesLaravelFiles
 
         $outputDir->deleteContents(
             recursive: true,
-            config:
+            config: new DirectoryIteratorConfig(
+                resultFilters: [
+                    fn(FilesystemObject $file) => $file->getFilename() !== '.gitignore'
+                ]
+            )
         );
     }
 }

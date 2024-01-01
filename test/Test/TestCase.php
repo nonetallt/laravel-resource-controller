@@ -5,7 +5,6 @@ namespace Test;
 use Nonetallt\LaravelResourceController\ServiceProvider;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as TestbenchTestCase;
-use PainlessPHP\Filesystem\Filesystem;
 use Test\Trait\UsesLaravelFiles;
 
 class TestCase extends TestbenchTestCase
@@ -31,14 +30,8 @@ class TestCase extends TestbenchTestCase
         ];
     }
 
-    public function getProjectRootPath(string ...$appends) : string
+    public static function applicationBasePath()
     {
-        $dir = Filesystem::findUpwards(__DIR__, 'composer.json')->getParentDirectory()->getPathname();
-        return Filesystem::appendToPath($dir, ...$appends);
-    }
-
-    public function getTestInputPath(string ...$appends) : string
-    {
-        return $this->getProjectRootPath('test', 'input', ...$appends);
+        return self::getTestInputDirectoryPath('laravel-skeleton');
     }
 }
