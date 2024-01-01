@@ -4,6 +4,13 @@ namespace Nonetallt\LaravelResourceController;
 
 class ResourceGeneratorConfig
 {
+    public const COMMANDS = [
+        'migration'  => true,
+        'model'      => true,
+        'controller' => true,
+        'requests'   => true
+    ];
+
     private string $resourceName;
     private array $actions;
 
@@ -41,5 +48,25 @@ class ResourceGeneratorConfig
     public function getResourcePlural() : string
     {
         return "{$this->resourceName}s";
+    }
+
+    public function getResourceControllerRoutesStub() : string
+    {
+        return file_get_contents();
+    }
+
+    public function getRouteFilePath() : string
+    {
+        $routeFilePath = app_path("routes/$routeFile");
+    }
+
+    public function getRequestSubdirectory() : string
+    {
+        return $this->getResourceName();
+    }
+
+    public function getRequestNamespace() : string
+    {
+        return 'App\\Http\\Requests\\';
     }
 }
