@@ -5,6 +5,7 @@ namespace Nonetallt\LaravelResourceController\Console\Command;
 use Nonetallt\LaravelResourceController\ResourceControllerAction;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use Nonetallt\LaravelResourceController\ResourceGeneratorConfigFactory;
 
 class GenerateResourceCommand extends Command
 {
@@ -27,6 +28,8 @@ class GenerateResourceCommand extends Command
      */
     public function handle()
     {
+        $factory = new ResourceGeneratorConfigFactory($this->argument('resource'));
+
 
         $resource = $this->argument('resource');
         $resource = lcfirst($resource);

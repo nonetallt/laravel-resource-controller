@@ -1,0 +1,1 @@
+- make sure stubs can be published and customized
