@@ -1,8 +1,8 @@
 <?php
 
-namespace Nonetallt\LaravelResourceBoiler\Console\Command;
+namespace Nonetallt\LaravelResourceController\Console\Command;
 
-use Nonetallt\LaravelResourceBoiler\ResourceControllerAction;
+use Nonetallt\LaravelResourceController\ResourceControllerAction;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 

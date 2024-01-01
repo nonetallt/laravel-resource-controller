@@ -1,15 +1,18 @@
 <?php
 
-namespace Nonetallt\LaravelResourceBoiler;
+namespace Nonetallt\LaravelResourceController;
 
 use Illuminate\Support\ServiceProvider as SupportServiceProvider;
-use Nonetallt\LaravelResourceBoiler\Console\Command\GenerateResourceCommand;
+use Nonetallt\LaravelResourceController\Console\Command\GenerateResourceCommand;
 
 class ServiceProvider extends SupportServiceProvider
 {
+    public const PACKAGE_NAME = 'resource-controller';
+    private const CONFIG_PATH = __DIR__ . '/../config/' . self::PACKAGE_NAME . '.php';
+
     public function register() : void
     {
-        $this->mergeConfigFrom(dirname(__DIR__) . '/config/resource-boiler.php', 'resource-boiler');
+        $this->mergeConfigFrom(self::CONFIG_PATH, self::PACKAGE_NAME);
     }
 
     public function boot() : void
@@ -19,5 +22,13 @@ class ServiceProvider extends SupportServiceProvider
                 GenerateResourceCommand::class
             ]);
         }
+
+        $this->publishes([
+            self::CONFIG_PATH => config_path(self::PACKAGE_NAME . '.php')
+        ], 'config');
+
+        $this->publishes([
+            __DIR__ . '/../stubs/' => app_path('stubs')
+        ], 'stubs');
     }
 }

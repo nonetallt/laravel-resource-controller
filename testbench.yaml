@@ -1,4 +1,4 @@
-laravel: 'test/input/laravel-skeleton'
+laravel: './test/input/laravel-skeleton'
 
 providers:
   # - Workbench\App\Providers\WorkbenchServiceProvider

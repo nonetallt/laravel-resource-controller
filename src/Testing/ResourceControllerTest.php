@@ -1,11 +1,11 @@
 <?php
 
-namespace Nonetallt\LaravelResourceBoiler\Testing;
+namespace Nonetallt\LaravelResourceController\Testing;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Nonetallt\LaravelResourceBoiler\ResourceControllerAction;
+use Nonetallt\LaravelResourceController\ResourceControllerAction;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Testing\TestCase;
 

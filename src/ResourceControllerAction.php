@@ -1,6 +1,6 @@
 <?php
 
-namespace Nonetallt\LaravelResourceBoiler;
+namespace Nonetallt\LaravelResourceController;
 
 enum ResourceControllerAction : string
 {
