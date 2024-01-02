@@ -5,7 +5,6 @@ namespace Nonetallt\LaravelResourceController;
 use Nonetallt\LaravelResourceController\Interface\CommandExecutor;
 use Nonetallt\LaravelResourceController\Interface\ViewStubProvider;
 use Nonetallt\LaravelResourceController\View\ResourceControllerViewStubProvider;
-use PainlessPHP\Filesystem\Directory;
 use PainlessPHP\Filesystem\File;
 
 class ResourceGenerator

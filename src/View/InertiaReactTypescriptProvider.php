@@ -12,7 +12,7 @@ class InertiaReactTypescriptProvider extends BaseViewStubProvider
     public function getReplacements() : array
     {
         return [
-            'view_name' => '',
+            'view_name' => $this->viewData->getName(),
             'view_prop_types' => $this->renderPropTypes(),
             'view_prop_names' => $this->renderPropNames(),
             'js_imports' => $this->renderJsImports()

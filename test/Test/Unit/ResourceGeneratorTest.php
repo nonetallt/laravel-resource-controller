@@ -1,5 +1,6 @@
 <?php
 
+use Nonetallt\LaravelResourceController\Internal\ViewData;
 use Nonetallt\LaravelResourceController\ResourceControllerAction;
 use Nonetallt\LaravelResourceController\ResourceGenerator;
 use Nonetallt\LaravelResourceController\ResourceGeneratorConfig;
@@ -128,14 +129,18 @@ describe('createViews', function() {
 
             $providers = collect(ResourceControllerAction::cases())->mapWithKeys(function(ResourceControllerAction $action) use($resource) {
                 $actionName = ucfirst($action->value);
-                $provider = new InertiaReactTypescriptProvider(resource_path("js/Pages/$resource/$resource$actionName.tsx"));
+                $viewName = "$resource$actionName";
+                $provider = new InertiaReactTypescriptProvider(
+                    outputPath: resource_path("js/Pages/$resource/$viewName.tsx"),
+                    viewData: new ViewData(name: $viewName)
+                );
                 return [$action->value => $provider];
             })->toArray();
 
             $generator->createViews(new ResourceControllerViewStubProvider($providers));
             $viewPath = resource_path('js/Pages/Foo/FooIndex.tsx');
             $this->assertFileExists($viewPath);
-            // $this->assertSame(file_get_contents(self::getTestInputDirectoryPath('expectation/FooControllerRoutes.php')), file_get_contents($routeFilePath));
+            $this->assertSame(file_get_contents(self::getTestInputDirectoryPath('expectation/FooIndex.tsx')), file_get_contents($viewPath));
         });
     });
 });

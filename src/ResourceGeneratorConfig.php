@@ -4,6 +4,7 @@ namespace Nonetallt\LaravelResourceController;
 
 use Illuminate\Support\Str;
 use Nonetallt\LaravelResourceController\Interface\ViewStubProvider;
+use Nonetallt\LaravelResourceController\View\ResourceControllerViewStubProvider;
 
 class ResourceGeneratorConfig
 {
@@ -16,7 +17,7 @@ class ResourceGeneratorConfig
 
     private string $resourceName;
     private array $actions;
-    private ViewStubProvider $viewProvider;
+    private ResourceControllerViewStubProvider $viewProvider;
 
     public function __construct(
         string $resourceName,
@@ -133,7 +134,7 @@ class ResourceGeneratorConfig
         return dirname(__DIR__) . "/stub/$stubFilename";
     }
 
-    public function getViewStubProvider() : ViewStubProvider
+    public function getViewStubProvider() : ResourceControllerViewStubProvider
     {
         return $this->viewProvider;
     }

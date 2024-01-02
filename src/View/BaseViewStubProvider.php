@@ -3,6 +3,7 @@
 namespace Nonetallt\LaravelResourceController\View;
 
 use Nonetallt\LaravelResourceController\Interface\ViewStubProvider;
+use Nonetallt\LaravelResourceController\Internal\ViewData;
 use Nonetallt\LaravelResourceController\Trait\UsesStubs;
 
 abstract class BaseViewStubProvider implements ViewStubProvider
@@ -10,7 +11,8 @@ abstract class BaseViewStubProvider implements ViewStubProvider
     use UsesStubs;
 
     public function __construct(
-        private string $outputPath
+        private string $outputPath,
+        protected ViewData $viewData
     )
     {
     }
