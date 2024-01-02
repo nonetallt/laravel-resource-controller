@@ -4,8 +4,57 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "475aaee426e4a0edf2c656bfc7759406",
-    "packages": [],
+    "content-hash": "07f6e4b2fed698629566217ad0190ece",
+    "packages": [
+        {
+            "name": "painless-php/filesystem",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/painless-php/filesystem.git",
+                "reference": "dbc1182f62a4bec40d338f5b39bdeed622d9a0ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/painless-php/filesystem/zipball/dbc1182f62a4bec40d338f5b39bdeed622d9a0ea",
+                "reference": "dbc1182f62a4bec40d338f5b39bdeed622d9a0ea",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.1",
+                "spatie/phpunit-watcher": "^1.22",
+                "vlucas/phpdotenv": "^v5.5.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PainlessPHP\\Filesystem\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Filesystem helper functionality",
+            "keywords": [
+                "directory",
+                "file",
+                "filesystem",
+                "helpers",
+                "iterator"
+            ],
+            "support": {
+                "issues": "https://github.com/painless-php/filesystem/issues",
+                "source": "https://github.com/painless-php/filesystem/tree/master"
+            },
+            "time": "2024-01-02T17:12:39+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "brianium/paratest",
@@ -3247,54 +3296,6 @@
                 "source": "https://github.com/orchestral/workbench/tree/v8.2.1"
             },
             "time": "2023-12-28T15:15:44+00:00"
-        },
-        {
-            "name": "painless-php/filesystem",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/painless-php/filesystem.git",
-                "reference": "dbc1182f62a4bec40d338f5b39bdeed622d9a0ea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/painless-php/filesystem/zipball/dbc1182f62a4bec40d338f5b39bdeed622d9a0ea",
-                "reference": "dbc1182f62a4bec40d338f5b39bdeed622d9a0ea",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": ">=8.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^10.1",
-                "spatie/phpunit-watcher": "^1.22",
-                "vlucas/phpdotenv": "^v5.5.0"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PainlessPHP\\Filesystem\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Filesystem helper functionality",
-            "keywords": [
-                "directory",
-                "file",
-                "filesystem",
-                "helpers",
-                "iterator"
-            ],
-            "support": {
-                "issues": "https://github.com/painless-php/filesystem/issues",
-                "source": "https://github.com/painless-php/filesystem/tree/master"
-            },
-            "time": "2024-01-02T17:12:39+00:00"
         },
         {
             "name": "pestphp/pest",
