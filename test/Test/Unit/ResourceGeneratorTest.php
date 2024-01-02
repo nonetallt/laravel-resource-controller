@@ -1,5 +1,6 @@
 <?php
 
+use Nonetallt\LaravelResourceController\ResourceControllerAction;
 use Nonetallt\LaravelResourceController\ResourceGenerator;
 use Nonetallt\LaravelResourceController\ResourceGeneratorConfig;
 
@@ -10,7 +11,20 @@ describe('generateRequests', function() {
     });
 
     it('creates files for every resource controller action request', function () {
-        $generator = new ResourceGenerator(new ResourceGeneratorConfig('Foo'));
-        dd($generator->generateRequests($this));
+
+        $resource = 'Foo';
+        $generator = new ResourceGenerator(
+            new ResourceGeneratorConfig(
+                resourceName: $resource,
+                requestSubdirectory: $resource
+            )
+        );
+
+        $generator->generateRequests($this);
+
+        foreach(ResourceControllerAction::cases() as $case) {
+            $action = ucfirst($case->value);
+            $this->assertFileExists(app_path("Http/Requests/$resource/$action{$resource}Request.php"));
+        }
     });
 });

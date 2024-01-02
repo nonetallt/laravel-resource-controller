@@ -14,7 +14,10 @@ class ResourceGeneratorConfig
     private string $resourceName;
     private array $actions;
 
-    public function __construct(string $resourceName)
+    public function __construct(
+        string $resourceName,
+        private ?string $requestSubdirectory = null
+    )
     {
         $this->setResourceName($resourceName);
         $this->actions = [];
@@ -62,6 +65,10 @@ class ResourceGeneratorConfig
 
     public function getRequestSubdirectory() : string
     {
+        if($this->requestSubdirectory) {
+            return $this->requestSubdirectory;
+        }
+
         return $this->getResourceName();
     }
 
