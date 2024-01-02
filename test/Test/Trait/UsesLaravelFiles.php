@@ -32,7 +32,7 @@ trait UsesLaravelFiles
 
     protected function initializeLaravelSkeleton()
     {
-        $input = Directory::createFromPath($this->getInputDirectoryPath('laravel-skeleton-template'));
+        $input = Directory::createFromPath(self::getTestInputDirectoryPath('laravel-skeleton-template'));
         $input->copy(destination: self::getLaravelApplicationPath(), recursive: true);
     }
 
@@ -44,7 +44,10 @@ trait UsesLaravelFiles
             recursive: true,
             config: new DirectoryIteratorConfig(
                 resultFilters: [
-                    fn(FilesystemObject $file) => $file->getFilename() !== '.gitignore'
+                    function(FilesystemObject $file) use($outputDir) {
+                        $filepath = $file->getRelativePath($outputDir->getPathname());
+                        return $filepath !== '.gitignore';
+                    }
                 ]
             )
         );
