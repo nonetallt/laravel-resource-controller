@@ -23,4 +23,9 @@ class Stub
     {
         return file_get_contents($this->path);
     }
+
+    public function getPathname() : string
+    {
+        return $this->path;
+    }
 }

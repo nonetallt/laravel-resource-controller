@@ -5,9 +5,11 @@ namespace Nonetallt\LaravelResourceController\Console\Command;
 use Nonetallt\LaravelResourceController\ResourceControllerAction;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use Nonetallt\LaravelResourceController\Interface\CommandExecutor;
+use Nonetallt\LaravelResourceController\ResourceGenerator;
 use Nonetallt\LaravelResourceController\ResourceGeneratorConfigFactory;
 
-class GenerateResourceCommand extends Command
+class GenerateResourceCommand extends Command implements CommandExecutor
 {
     /**
      * The name and signature of the console command.
@@ -30,6 +32,13 @@ class GenerateResourceCommand extends Command
     {
         $factory = new ResourceGeneratorConfigFactory($this->argument('resource'));
 
+        // TODO ask questions to generate config
+        // TODO ask confirmation if generated stuff is okay
+
+        if($this->confirm('TODO', true)) {
+            $generator = new ResourceGenerator($factory->createConfig());
+            $generator->generate($this);
+        }
 
         $resource = $this->argument('resource');
         $resource = lcfirst($resource);
@@ -62,6 +71,11 @@ class GenerateResourceCommand extends Command
 
         dd($routeFilePath);
         file_put_contents($routeFilePath, file_get_contents($routeFilePath) . PHP_EOL . $routes);
+    }
+
+    public function executeCommand(string $command, array $args)
+    {
+        return $this->call($command, $args);
     }
 
     /**

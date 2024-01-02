@@ -13,6 +13,11 @@ class ResourceGeneratorConfigFactory
         $this->actions = [];
     }
 
+    public function createConfig() : ResourceGeneratorConfig
+    {
+        // TODO
+    }
+
     private function setResourceName(string $resourceName)
     {
         $this->resourceName = ucfirst($resourceName);

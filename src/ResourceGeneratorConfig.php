@@ -3,6 +3,7 @@
 namespace Nonetallt\LaravelResourceController;
 
 use Illuminate\Support\Str;
+use Nonetallt\LaravelResourceController\Interface\ViewStubProvider;
 
 class ResourceGeneratorConfig
 {
@@ -15,14 +16,20 @@ class ResourceGeneratorConfig
 
     private string $resourceName;
     private array $actions;
+    private ViewStubProvider $viewProvider;
 
     public function __construct(
         string $resourceName,
-        private ?string $requestSubdirectory = null
+        private ?string $requestSubdirectory = null,
+        private bool $createViewsRecursively = false
     )
     {
         $this->setResourceName($resourceName);
         $this->actions = [];
+
+        foreach (ResourceControllerAction::cases() as $case) {
+            $this->addAction($case);
+        }
     }
 
     private function setResourceName(string $resourceName)
@@ -59,8 +66,6 @@ class ResourceGeneratorConfig
     {
         return "{$this->resourceName}s";
     }
-
-
 
     public function getRequestSubdirectory() : string
     {
@@ -126,5 +131,15 @@ class ResourceGeneratorConfig
         }
 
         return dirname(__DIR__) . "/stub/$stubFilename";
+    }
+
+    public function getViewStubProvider() : ViewStubProvider
+    {
+        return $this->viewProvider;
+    }
+
+    public function shouldCreateViewsRecursively() : bool
+    {
+        return $this->createViewsRecursively;
     }
 }

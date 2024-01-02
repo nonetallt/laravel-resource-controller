@@ -3,6 +3,10 @@
 namespace Nonetallt\LaravelResourceController;
 
 use Nonetallt\LaravelResourceController\Interface\CommandExecutor;
+use Nonetallt\LaravelResourceController\Interface\ViewStubProvider;
+use Nonetallt\LaravelResourceController\View\ResourceControllerViewStubProvider;
+use PainlessPHP\Filesystem\Directory;
+use PainlessPHP\Filesystem\File;
 
 class ResourceGenerator
 {
@@ -17,17 +21,17 @@ class ResourceGenerator
         $this->createRequests($executor);
         $this->createController($executor);
         $this->createControllerRoutes();
-        $this->createViews();
+        $this->createViews($this->config->getViewStubProvider());
     }
 
     public function createMigration(CommandExecutor $executor)
     {
-        return $executor->execute('make:migration', ['name' => $this->config->getMigrationName()]);
+        return $executor->executeCommand('make:migration', ['name' => $this->config->getMigrationName()]);
     }
 
     public function createModel(CommandExecutor $executor)
     {
-        return $executor->execute('make:model', ['name' => $this->config->getModelName()]);
+        return $executor->executeCommand('make:model', ['name' => $this->config->getModelName()]);
     }
 
     public function createRequests(CommandExecutor $executor) : array
@@ -37,13 +41,13 @@ class ResourceGenerator
         $requestSubdir = $this->config->getRequestSubdirectory();
         $requestNamespace = $this->config->getRequestNamespace();
 
-        foreach (ResourceControllerAction::cases() as $case) {
-            $action = ucfirst($case->value);
+        foreach ($this->config->getActions() as $action) {
+            $action = ucfirst($action);
             $requestName = "$action{$resource}Request";
             $request = "$requestSubdir/$requestName";
 
             $this->createRequest($request, $executor);
-            $created[$case->value] = $requestNamespace . str_replace('/', '\\', $request);
+            $created[$action] = $requestNamespace . str_replace('/', '\\', $request);
         }
 
         return $created;
@@ -51,13 +55,13 @@ class ResourceGenerator
 
     private function createRequest(string $request, CommandExecutor $executor)
     {
-        return $executor->execute('make:request', ['name' => $request]);
+        return $executor->executeCommand('make:request', ['name' => $request]);
     }
 
     public function createController(CommandExecutor $executor)
     {
         // TODO resource controller
-        return $executor->execute('make:controller', ['name' => $this->config->getControllerName(), '--resource' => true]);
+        return $executor->executeCommand('make:controller', ['name' => $this->config->getControllerName(), '--resource' => true]);
     }
 
     public function createControllerRoutes()
@@ -79,20 +83,28 @@ class ResourceGenerator
         file_put_contents($routeFilePath, $oldContent . PHP_EOL . $routes);
     }
 
-    public function createViews()
+    public function createViews(ResourceControllerViewStubProvider $provider)
     {
-        $stub = new Stub($this->config->getViewStubPath());
-        file_put_contents($this->config->getViewOutputPath(), $stub->render($this->getViewReplacemements()));
+        foreach($this->config->getActions() as $action) {
+
+            $action = ResourceControllerAction::from($action);
+
+            if($provider->hasAction($action)) {
+                $this->createView($provider->getProvider($action));
+            }
+        }
     }
 
-    private function getViewReplacemements(ResourceControllerAction $action) : array
+    private function createView(ViewStubProvider $provider)
     {
-        return [
-            'view_name' => $this->config->getViewName($action),
-            'view_prop_types' => implode(','),
-            'view_prop_names' => implode(PHP_EOL),
-            'js_imports' => implode(PHP_EOL)
-        ];
+        $stub = new Stub($provider->getStubPath());
+
+        if($this->config->shouldCreateViewsRecursively()) {
+            $dir = (new File($provider->getOutputPath()))->getParentDirectory();
+            $dir->create(recursive: true);
+        }
+
+        file_put_contents($provider->getOutputPath(), $stub->render($provider->getReplacements()));
     }
 
     public function getConfig() : ResourceGeneratorConfig

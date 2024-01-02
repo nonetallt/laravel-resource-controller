@@ -13,6 +13,7 @@ class TestCase extends TestbenchTestCase implements CommandExecutor
 
     protected function setUp() : void
     {
+        $this->cleanOutput();
         $this->initializeLaravelSkeleton();
         parent::setUp();
     }
@@ -35,7 +36,7 @@ class TestCase extends TestbenchTestCase implements CommandExecutor
         return self::getLaravelApplicationPath();
     }
 
-    public function execute(string $command, array $args)
+    public function executeCommand(string $command, array $args)
     {
         return $this->artisan($command, $args);
     }

@@ -3,6 +3,8 @@
 use Nonetallt\LaravelResourceController\ResourceControllerAction;
 use Nonetallt\LaravelResourceController\ResourceGenerator;
 use Nonetallt\LaravelResourceController\ResourceGeneratorConfig;
+use Nonetallt\LaravelResourceController\View\InertiaReactTypescriptProvider;
+use Nonetallt\LaravelResourceController\View\ResourceControllerViewStubProvider;
 
 describe('generateMigration', function() {
 
@@ -104,5 +106,36 @@ describe('createControllerRoutes', function() {
         $routeFilePath = base_path('routes/web.php');
         $this->assertFileExists($routeFilePath);
         $this->assertSame(file_get_contents(self::getTestInputDirectoryPath('expectation/FooControllerRoutes.php')), file_get_contents($routeFilePath));
+    });
+});
+
+describe('createViews', function() {
+
+    describe('inertia.react.ts view', function() {
+
+        test('view file does not exist before being generated', function () {
+            $this->assertFileDoesNotExist(resource_path('js/Pages/Foo/FooIndex.tsx'));
+        });
+
+        it('creates view file', function () {
+            $resource = 'Foo';
+            $generator = new ResourceGenerator(
+                new ResourceGeneratorConfig(
+                    resourceName: $resource,
+                    createViewsRecursively: true
+                )
+            );
+
+            $providers = collect(ResourceControllerAction::cases())->mapWithKeys(function(ResourceControllerAction $action) use($resource) {
+                $actionName = ucfirst($action->value);
+                $provider = new InertiaReactTypescriptProvider(resource_path("js/Pages/$resource/$resource$actionName.tsx"));
+                return [$action->value => $provider];
+            })->toArray();
+
+            $generator->createViews(new ResourceControllerViewStubProvider($providers));
+            $viewPath = resource_path('js/Pages/Foo/FooIndex.tsx');
+            $this->assertFileExists($viewPath);
+            // $this->assertSame(file_get_contents(self::getTestInputDirectoryPath('expectation/FooControllerRoutes.php')), file_get_contents($routeFilePath));
+        });
     });
 });

@@ -727,16 +727,16 @@
         },
         {
             "name": "fakerphp/faker",
-            "version": "v1.23.0",
+            "version": "v1.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FakerPHP/Faker.git",
-                "reference": "e3daa170d00fde61ea7719ef47bb09bb8f1d9b01"
+                "reference": "bfb4fe148adbf78eff521199619b93a52ae3554b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/e3daa170d00fde61ea7719ef47bb09bb8f1d9b01",
-                "reference": "e3daa170d00fde61ea7719ef47bb09bb8f1d9b01",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/bfb4fe148adbf78eff521199619b93a52ae3554b",
+                "reference": "bfb4fe148adbf78eff521199619b93a52ae3554b",
                 "shasum": ""
             },
             "require": {
@@ -762,11 +762,6 @@
                 "ext-mbstring": "Required for multibyte Unicode string functionality."
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "v1.21-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Faker\\": "src/Faker/"
@@ -789,9 +784,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FakerPHP/Faker/issues",
-                "source": "https://github.com/FakerPHP/Faker/tree/v1.23.0"
+                "source": "https://github.com/FakerPHP/Faker/tree/v1.23.1"
             },
-            "time": "2023-06-12T08:44:38+00:00"
+            "time": "2024-01-02T13:46:09+00:00"
         },
         {
             "name": "fidry/cpu-core-counter",
@@ -3259,12 +3254,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/painless-php/filesystem.git",
-                "reference": "65b0ae1df24a52795faf0b70a1b9c138dbcc832d"
+                "reference": "dbc1182f62a4bec40d338f5b39bdeed622d9a0ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/painless-php/filesystem/zipball/65b0ae1df24a52795faf0b70a1b9c138dbcc832d",
-                "reference": "65b0ae1df24a52795faf0b70a1b9c138dbcc832d",
+                "url": "https://api.github.com/repos/painless-php/filesystem/zipball/dbc1182f62a4bec40d338f5b39bdeed622d9a0ea",
+                "reference": "dbc1182f62a4bec40d338f5b39bdeed622d9a0ea",
                 "shasum": ""
             },
             "require": {
@@ -3299,7 +3294,7 @@
                 "issues": "https://github.com/painless-php/filesystem/issues",
                 "source": "https://github.com/painless-php/filesystem/tree/master"
             },
-            "time": "2024-01-02T13:10:56+00:00"
+            "time": "2024-01-02T17:12:39+00:00"
         },
         {
             "name": "pestphp/pest",
