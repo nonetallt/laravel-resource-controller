@@ -67,3 +67,22 @@ describe('createRequests', function() {
         }
     });
 });
+
+describe('generateController', function() {
+
+    test('controllere file does not exist before being generated', function () {
+        $resource = 'Foo';
+        $this->assertFileDoesNotExist(app_path("Http/Controllers/$resource.php"));
+    });
+
+    it('creates model file', function () {
+        $resource = 'Foo';
+        $generator = new ResourceGenerator(
+            new ResourceGeneratorConfig(
+                resourceName: $resource
+            )
+        );
+        $generator->createController($this);
+        $this->assertFileExists(app_path("Http/Controllers/{$resource}Controller.php"));
+    });
+});
