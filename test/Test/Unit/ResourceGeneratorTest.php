@@ -68,9 +68,9 @@ describe('createRequests', function() {
     });
 });
 
-describe('generateController', function() {
+describe('createController', function() {
 
-    test('controllere file does not exist before being generated', function () {
+    test('controller file does not exist before being generated', function () {
         $resource = 'Foo';
         $this->assertFileDoesNotExist(app_path("Http/Controllers/$resource.php"));
     });
@@ -84,5 +84,25 @@ describe('generateController', function() {
         );
         $generator->createController($this);
         $this->assertFileExists(app_path("Http/Controllers/{$resource}Controller.php"));
+    });
+});
+
+describe('createControllerRoutes', function() {
+
+    test('routes file does not exist before being generated', function () {
+        $this->assertFileDoesNotExist(base_path('routes/web.php'));
+    });
+
+    it('creates model file', function () {
+        $resource = 'Foo';
+        $generator = new ResourceGenerator(
+            new ResourceGeneratorConfig(
+                resourceName: $resource
+            )
+        );
+        $generator->createControllerRoutes();
+        $routeFilePath = base_path('routes/web.php');
+        $this->assertFileExists($routeFilePath);
+        $this->assertSame(file_get_contents(self::getTestInputDirectoryPath('expectation/FooControllerRoutes.php')), file_get_contents($routeFilePath));
     });
 });
