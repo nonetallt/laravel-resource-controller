@@ -9,6 +9,11 @@ use PainlessPHP\Filesystem\FilesystemObject;
 
 trait UsesLaravelFiles
 {
+    static protected function getLaravelApplicationPath() : string
+    {
+        return self::getTestOutputDirectoryPath('laravel-skeleton');
+    }
+
     static protected function getProjectRootPath(string ...$appends) : string
     {
         $dir = Filesystem::findUpwards(__DIR__, 'composer.json')->getParentDirectory()->getPathname();
@@ -27,12 +32,8 @@ trait UsesLaravelFiles
 
     protected function initializeLaravelSkeleton()
     {
-        $laravelPath = base_path();
-        $laravelDir = Directory::createFromPath($laravelPath);
-        $laravelDir->delete(recursive: true);
-
-        $input = Directory::createFromPath(self::getInputDirectoryPath('laravel-skeleton-template'));
-        $input->copy(destination: $laravelPath, recursive: true);
+        $input = Directory::createFromPath($this->getInputDirectoryPath('laravel-skeleton-template'));
+        $input->copy(destination: self::getLaravelApplicationPath(), recursive: true);
     }
 
     protected function cleanOutput()

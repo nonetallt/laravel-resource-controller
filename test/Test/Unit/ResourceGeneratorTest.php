@@ -11,6 +11,6 @@ describe('generateRequests', function() {
 
     it('creates files for every resource controller action request', function () {
         $generator = new ResourceGenerator(new ResourceGeneratorConfig('Foo'));
-        // dd($generator->generateRequests($this));
+        dd($generator->generateRequests($this));
     });
 });

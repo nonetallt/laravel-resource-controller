@@ -13,8 +13,8 @@ class TestCase extends TestbenchTestCase implements CommandExecutor
 
     protected function setUp() : void
     {
-        parent::setUp();
         $this->initializeLaravelSkeleton();
+        parent::setUp();
     }
 
     protected function tearDown(): void
@@ -32,7 +32,7 @@ class TestCase extends TestbenchTestCase implements CommandExecutor
 
     public static function applicationBasePath()
     {
-        return self::getTestOutputDirectoryPath('laravel-skeleton');
+        return self::getLaravelApplicationPath();
     }
 
     public function execute(string $command, array $args)
