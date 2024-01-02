@@ -52,4 +52,17 @@ trait UsesLaravelFiles
             )
         );
     }
+
+    /**
+     * Parse migration names from migration filenames by stripping dates and extension
+     *
+     */
+    protected function getMigrationNames() : array
+    {
+        $migrationDir = Directory::createFromPath(database_path('migrations'));
+
+        return array_map(function(FilesystemObject $obj) {
+            return basename(implode('_', array_slice(explode('_', $obj->getFilename()), 4)), '.php');
+        }, $migrationDir->getContents(recursive: true));
+    }
 }

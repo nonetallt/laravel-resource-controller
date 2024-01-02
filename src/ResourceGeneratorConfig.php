@@ -2,6 +2,8 @@
 
 namespace Nonetallt\LaravelResourceController;
 
+use Illuminate\Support\Str;
+
 class ResourceGeneratorConfig
 {
     public const COMMANDS = [
@@ -43,9 +45,14 @@ class ResourceGeneratorConfig
         return array_keys($this->actions);
     }
 
+    public function getMigrationTableName() : string
+    {
+        return Str::snake($this->getResourcePlural());
+    }
+
     public function getMigrationName() : string
     {
-        return "create_{$this->getResourcePlural()}_table";
+        return "create_{$this->getMigrationTableName()}_table";
     }
 
     public function getResourcePlural() : string

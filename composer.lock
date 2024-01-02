@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3756660b64109fd05a36fcf9b26a424a",
+    "content-hash": "475aaee426e4a0edf2c656bfc7759406",
     "packages": [],
     "packages-dev": [
         {
@@ -3259,12 +3259,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/painless-php/filesystem.git",
-                "reference": "99a373745ad6ae4e9df838b8a5a6098ed4cc3a25"
+                "reference": "65b0ae1df24a52795faf0b70a1b9c138dbcc832d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/painless-php/filesystem/zipball/99a373745ad6ae4e9df838b8a5a6098ed4cc3a25",
-                "reference": "99a373745ad6ae4e9df838b8a5a6098ed4cc3a25",
+                "url": "https://api.github.com/repos/painless-php/filesystem/zipball/65b0ae1df24a52795faf0b70a1b9c138dbcc832d",
+                "reference": "65b0ae1df24a52795faf0b70a1b9c138dbcc832d",
                 "shasum": ""
             },
             "require": {
@@ -3299,7 +3299,7 @@
                 "issues": "https://github.com/painless-php/filesystem/issues",
                 "source": "https://github.com/painless-php/filesystem/tree/master"
             },
-            "time": "2024-01-01T17:20:41+00:00"
+            "time": "2024-01-02T13:10:56+00:00"
         },
         {
             "name": "pestphp/pest",

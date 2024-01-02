@@ -12,15 +12,15 @@ class ResourceGenerator
 
     public function generate(CommandExecutor $executor)
     {
-        $this->generateMigration($executor);
-        $this->generateModel($executor);
-        $this->generateRequests($executor);
-        $this->generateController($executor);
-        $this->generateRoutes($executor);
-        $this->generateViews($executor);
+        $this->createMigration($executor);
+        $this->createModel($executor);
+        $this->createRequests($executor);
+        $this->createController($executor);
+        $this->createRoutes($executor);
+        $this->createViews($executor);
     }
 
-    public function generateRequests(CommandExecutor $executor) : array
+    public function createRequests(CommandExecutor $executor) : array
     {
         $created = [];
         $resource = $this->config->getResourceName();
@@ -37,6 +37,12 @@ class ResourceGenerator
         }
 
         return $created;
+    }
+
+    public function createMigration(CommandExecutor $executor)
+    {
+        var_dump($this->config->getMigrationName());
+        return $executor->execute('make:migration', ['name' => $this->config->getMigrationName()]);
     }
 
     private function createRequest(string $request, CommandExecutor $executor)
