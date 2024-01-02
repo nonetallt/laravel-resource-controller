@@ -41,6 +41,6 @@ class ResourceGenerator
 
     private function createRequest(string $request, CommandExecutor $executor)
     {
-        $executor->execute('make:request', [$request]);
+        return $executor->execute('make:request', ['name' => $request]);
     }
 }

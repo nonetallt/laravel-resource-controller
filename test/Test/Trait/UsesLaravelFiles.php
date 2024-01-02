@@ -27,8 +27,12 @@ trait UsesLaravelFiles
 
     protected function initializeLaravelSkeleton()
     {
-        // $input = Directory::createFromPath(self::getInputDirectoryPath('laravel-skeleton'));
-        // $input->copy(self::getTestOutputDirectoryPath('laravel-skeleton'), recursive: true);
+        $laravelPath = base_path();
+        $laravelDir = Directory::createFromPath($laravelPath);
+        $laravelDir->delete(recursive: true);
+
+        $input = Directory::createFromPath(self::getInputDirectoryPath('laravel-skeleton-template'));
+        $input->copy(destination: $laravelPath, recursive: true);
     }
 
     protected function cleanOutput()

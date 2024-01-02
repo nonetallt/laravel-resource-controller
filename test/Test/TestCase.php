@@ -2,14 +2,14 @@
 
 namespace Test;
 
+use Nonetallt\LaravelResourceController\Interface\CommandExecutor;
 use Nonetallt\LaravelResourceController\ServiceProvider;
-use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as TestbenchTestCase;
 use Test\Trait\UsesLaravelFiles;
 
-class TestCase extends TestbenchTestCase
+class TestCase extends TestbenchTestCase implements CommandExecutor
 {
-    use WithWorkbench, UsesLaravelFiles;
+    use UsesLaravelFiles;
 
     protected function setUp() : void
     {
@@ -32,6 +32,11 @@ class TestCase extends TestbenchTestCase
 
     public static function applicationBasePath()
     {
-        return self::getTestInputDirectoryPath('laravel-skeleton');
+        return self::getTestOutputDirectoryPath('laravel-skeleton');
+    }
+
+    public function execute(string $command, array $args)
+    {
+        return $this->artisan($command, $args);
     }
 }
