@@ -89,4 +89,9 @@ class ResourceGenerator
             'js_imports' => implode(PHP_EOL)
         ];
     }
+
+    public function getConfig() : ResourceGeneratorConfig
+    {
+        return $this->config;
+    }
 }

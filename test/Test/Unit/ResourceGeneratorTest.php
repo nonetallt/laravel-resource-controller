@@ -25,6 +25,25 @@ describe('generateMigration', function() {
     });
 });
 
+describe('generateModel', function() {
+
+    test('model file does not exist before being generated', function () {
+        $resource = 'Foo';
+        $this->assertFileDoesNotExist(app_path("Models/$resource.php"));
+    });
+
+    it('creates model file', function () {
+        $resource = 'Foo';
+        $generator = new ResourceGenerator(
+            new ResourceGeneratorConfig(
+                resourceName: $resource
+            )
+        );
+        $generator->createModel($this);
+        $this->assertFileExists(app_path("Models/$resource.php"));
+    });
+});
+
 describe('createRequests', function() {
 
     test('request files do not exist before being created', function () {
@@ -36,8 +55,7 @@ describe('createRequests', function() {
         $resource = 'Foo';
         $generator = new ResourceGenerator(
             new ResourceGeneratorConfig(
-                resourceName: $resource,
-                requestSubdirectory: $resource
+                resourceName: $resource
             )
         );
 
