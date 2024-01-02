@@ -1,2 +1,2 @@
 
-Route::resource('foo', App\Http\Controller\FooController::class);
+Route::resource('foo', App\Http\Controllers\FooController::class);

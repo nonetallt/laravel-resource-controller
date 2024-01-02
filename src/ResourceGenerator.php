@@ -70,8 +70,13 @@ class ResourceGenerator
         ]);
 
         $routeFilePath = $this->config->getRouteFilePath();
-        dd($routeFilePath);
-        file_put_contents($routeFilePath, file_get_contents($routeFilePath) . PHP_EOL . $routes);
+        $oldContent = '';
+
+        if(file_exists($routeFilePath)) {
+            $oldContent = file_get_contents($routeFilePath);
+        }
+
+        file_put_contents($routeFilePath, $oldContent . PHP_EOL . $routes);
     }
 
     public function createViews()
