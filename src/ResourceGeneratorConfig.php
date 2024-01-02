@@ -60,15 +60,7 @@ class ResourceGeneratorConfig
         return "{$this->resourceName}s";
     }
 
-    public function getResourceControllerRoutesStub() : string
-    {
-        return file_get_contents();
-    }
 
-    public function getRouteFilePath() : string
-    {
-        $routeFilePath = app_path("routes/$routeFile");
-    }
 
     public function getRequestSubdirectory() : string
     {
@@ -82,5 +74,57 @@ class ResourceGeneratorConfig
     public function getRequestNamespace() : string
     {
         return 'App\\Http\\Requests\\';
+    }
+
+    public function getModelName() : string
+    {
+        return $this->resourceName;
+    }
+
+    public function getControllerName() : string
+    {
+        return "{$this->resourceName}Controller";
+    }
+
+    public function getControllerNamespace() : string
+    {
+        return 'App\\Http\\Controllers\\';
+    }
+
+    public function getControllerClass() : string
+    {
+        return $this->getControllerNamespace() . $this->getControllerName();
+    }
+
+    public function getRouteResourceName() : string
+    {
+        return Str::snake($this->resourceName);
+    }
+
+    public function getRouteFileName() : string
+    {
+        return 'web.php';
+    }
+
+    public function getRouteFilePath() : string
+    {
+        return base_path("routes/{$this->getRouteFileName()}");
+    }
+
+    public function getLaravelApplicationStubsPath() : string
+    {
+        return base_path('stubs');
+    }
+
+    public function getResourceControllerRoutesStubPath() : string
+    {
+        $stubFilename = 'route.resource-controller.stub';
+        $customStubPath = $this->getLaravelApplicationStubsPath() . "/$stubFilename";
+
+        if(file_exists($customStubPath)) {
+            return $customStubPath;
+        }
+
+        return dirname(__DIR__) . "/stub/$stubFilename";
     }
 }

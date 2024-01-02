@@ -1,0 +1,14 @@
+{{ js_imports }}
+
+type Props = {
+{{ view_prop_types }}
+}
+
+export default function InertiaReactPage({{{ view_prop_names }}} : Props) {
+
+  return (
+    <>
+      {{ view_name }}
+    </>
+  )
+}

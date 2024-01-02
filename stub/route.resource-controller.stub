@@ -1,0 +1,1 @@
+Route::resource('{{ route_resource_name }}', {{ controller_class }}::class);

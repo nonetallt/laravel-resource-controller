@@ -1,3 +1,0 @@
-Route::resource('{{resource_name}}', {{controller_class}}::class, [
-    'only' => [{{actions}}]]
-);
